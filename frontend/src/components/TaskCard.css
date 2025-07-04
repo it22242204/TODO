@@ -1,0 +1,165 @@
+@keyframes slideDownFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-card {
+  animation: slideDownFadeIn 0.5s ease-out forwards;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  min-height: 150px;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-card.completed {
+  opacity: 0.85;
+  background: #e6f4ea;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.task-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* IE/Edge */
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+}
+
+.status-badge.pending {
+  background-color: #eff6ff;
+  color: #4a90e2;
+}
+
+.status-badge.done {
+  background-color: #28a745;
+  color: white;
+}
+
+.task-description {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text; /* Firefox */
+  -ms-user-select: text; /* IE/Edge */
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.task-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.task-btn-done {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.task-btn-done:hover:not(:disabled) {
+  background-color: #3a78c2;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+  transform: translateY(-2px);
+}
+
+.task-btn-done:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.task-btn-delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.task-btn-delete:hover {
+  background-color: #c0392b;
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.4);
+  transform: translateY(-2px);
+}
+
+.task-btn-delete:focus,
+.task-btn-done:focus {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* Staggered animation for task cards */
+.task-list .task-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.task-list .task-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.task-list .task-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.task-list .task-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.task-list .task-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .task-card {
+    padding: 1rem;
+  }
+  .task-title {
+    font-size: 1.1rem;
+  }
+  .task-description {
+    font-size: 0.9rem;
+  }
+  .task-btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
