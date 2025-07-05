@@ -1,37 +1,48 @@
 import request from 'supertest';
 import app from './index.js';
 
-// Mock the db module used in your app
+// Mock the database module used in the app
 jest.mock('./db.js', () => ({
   query: jest.fn()
 }));
 
 import db from './db.js';
 
-describe("Tasks API", () => {
+describe("Tasks API Tests", () => {
+
+  // Clear any previous mock data before each test
   beforeEach(() => {
-    // Reset mocks before each test
     jest.clearAllMocks();
   });
 
-  it("GET /tasks - should return an array of tasks", async () => {
-    // Mock the db query to return fake tasks
-    db.query.mockResolvedValue([[{ id: 1, title: "Mock Task", description: "Mock Desc", completed: false }]]);
-    const res = await request(app).get("/tasks");
-    expect(res.statusCode).toEqual(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0].title).toBe("Mock Task");
+  // Test: Fetching recent incomplete tasks
+  it("GET /tasks - should return a list of incomplete tasks", async () => {
+    // Simulate database response with a mock task
+    db.query.mockResolvedValue([
+      [{ id: 1, title: "Mock Task", description: "Mock Desc", completed: false }]
+    ]);
+
+    const response = await request(app).get("/tasks");
+
+    expect(response.statusCode).toBe(200); // Success
+    expect(Array.isArray(response.body)).toBe(true); // Should return an array
+    expect(response.body[0].title).toBe("Mock Task"); // Check content
   });
 
-  it("POST /tasks - should create a new task", async () => {
-    // Mock the db query for insert (usually returns an object with insertId)
+  // Test: Creating a new task
+  it("POST /tasks - should add a new task to the database", async () => {
+    // Simulate insert response from the database
     db.query.mockResolvedValue([{ insertId: 2 }]);
-    const res = await request(app).post("/tasks").send({
+
+    const response = await request(app).post("/tasks").send({
       title: "Test Task",
       description: "Test Description"
     });
-    expect(res.statusCode).toEqual(201);
-    // Optionally check for id if your API returns it
-    // expect(res.body).toHaveProperty("id");
+
+    expect(response.statusCode).toBe(201); // Created successfully
+
+    // Optional: Check response body if the API returns the new task
+    // expect(response.body).toHaveProperty("id");
   });
+
 });

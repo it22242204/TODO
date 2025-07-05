@@ -14,7 +14,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "5050:5000"  # ⬅ Changed from 5000:5000
+      - "5050:5000"  
     depends_on:
       - mysql
     command: npm start
