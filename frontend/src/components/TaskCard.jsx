@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';import PropTypes from 'prop-types';
 import './TaskCard.css';
 
 function TaskCard({ task, onDone, onDelete }) {
